@@ -1,11 +1,30 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
-    <title>Spring Security Example</title>
+    <title>Home Page</title>
+    <style>
+        .username {
+            color: green;
+        }
+    </style>
 </head>
 <body>
-<h1>Welcome the the home page!</h1>
-
-<p>Click <a th:href="@{/hello}">here</a> to login and see your greeting.</p>
+<div th:if="${username != null}">
+    <h1>You are logged in as
+        <span th:text="${username}" class="username">User</span>.
+    </h1>
+    <button onclick="window.location.href='/register'">Register new user</button>
+    <button onclick="window.location.href='/list'">Users</button>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
+<div th:if="${username == null}">
+    <h1>Hello, welcome to this site.</h1>
+    <a th:href="@{/login}">Login</a>
+</div>
 </body>
 </html>
+
+
+
