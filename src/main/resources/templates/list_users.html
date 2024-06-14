@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User List</title>
+</head>
+<body>
+<h2>User List</h2>
+
+<!-- Search bar -->
+<form action="/list" method="get">
+    <label for="search">Search Username:</label>
+    <input type="text" id="search" name="search" placeholder="Enter username">
+    <button type="submit">Search</button>
+</form>
+
+<!-- Show the searched user on top of the page if exists -->
+<div th:if="${searchedUser}">
+    <h3>Searched User</h3>
+    <p>Username: <span th:text="${searchedUser.username}"></span></p>
+    <p>Email: <span th:text="${searchedUser.email}"></span></p>
+    <p>Role: <span th:text="${searchedUser.role}"></span></p>
+    <form action="/update_user" method="get" th:action="@{/update_user}">
+        <input type="hidden" name="username" th:value="${searchedUser.username}"/>
+        <button type="submit">Update</button>
+    </form>
+    <form action="/delete" method="get" th:action="@{/delete}">
+        <input type="hidden" name="username" th:value="${searchedUser.username}"/>
+        <button type="submit">Delete user</button>
+    </form>
+</div>
+
+<!-- Table of all users -->
+<table>
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.username}">Username</td>
+        <td th:text="${user.email}">Email</td>
+        <td th:text="${user.role}">Role</td>
+        <td>
+            <form action="/update_user" method="get" th:action="@{/update_user}">
+                <input type="hidden" name="username" th:value="${user.username}"/>
+                <button type="submit">Update</button>
+            </form>
+            <form action="/delete" method="get" th:action="@{/delete}">
+                <input type="hidden" name="username" th:value="${user.username}"/>
+                <button type="submit">Delete user</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<button onclick="window.location.href='/register'">Add new user</button>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+</body>
+</html>

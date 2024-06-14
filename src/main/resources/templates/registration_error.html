@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration Error</title>
+</head>
+<body>
+<h1>Error (User already exist)</h1>
+<p th:text="${error}"></p>
+<p>Please make sure the username and email are unique.</p>
+<h2>Go back to list</h2>
+<button onclick="window.location.href='/list'">Users</button>
+</body>
+</html>
