@@ -1,0 +1,40 @@
+2024-06-13 23:42:48 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 95385 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-13 23:42:48 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-13 23:42:48 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-13 23:42:50 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 2.344 seconds (process running for 2.804)
+2024-06-13 23:45:35 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 95412 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-13 23:45:35 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-13 23:45:35 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-13 23:45:37 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 2.031 seconds (process running for 2.51)
+2024-06-13 23:47:59 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 95437 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-13 23:47:59 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-13 23:47:59 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-13 23:48:00 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 1.827 seconds (process running for 2.185)
+2024-06-13 23:49:32 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 95449 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-13 23:49:32 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-13 23:49:32 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-13 23:49:34 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 2.191 seconds (process running for 2.702)
+2024-06-13 23:55:43 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 95505 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-13 23:55:43 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-13 23:55:43 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-13 23:55:45 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 2.439 seconds (process running for 2.826)
+2024-06-13 23:57:29 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 95647 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-13 23:57:29 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-13 23:57:29 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-13 23:57:31 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 2.286 seconds (process running for 2.724)
+2024-06-13 23:58:25 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 95663 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-13 23:58:25 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-13 23:58:25 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-13 23:58:27 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 2.234 seconds (process running for 2.832)
+2024-06-14 09:52:48 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 96782 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-14 09:52:48 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-14 09:52:48 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-14 09:52:50 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 1.95 seconds (process running for 2.332)
+2024-06-14 10:53:34 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 97098 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-14 10:53:34 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-14 10:53:34 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-14 10:53:36 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 2.044 seconds (process running for 2.772)
+2024-06-14 11:54:24 [main] INFO  c.u.s.SecureWebApplication - Starting SecureWebApplication using Java 22.0.1 with PID 98144 (/Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app/target/classes started by kristian in /Users/kristian/Documents/IT och Informationssäkerhet/secure-web-app)
+2024-06-14 11:54:24 [main] DEBUG c.u.s.SecureWebApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-14 11:54:24 [main] INFO  c.u.s.SecureWebApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-14 11:54:25 [main] INFO  c.u.s.SecureWebApplication - Started SecureWebApplication in 1.972 seconds (process running for 2.399)

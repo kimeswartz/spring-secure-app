@@ -1,11 +1,36 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" lang="en">
 <head>
-    <title>Spring Security Example</title>
+    <meta charset="UTF-8">
+    <title>Securitas</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}" />
 </head>
 <body>
-<h1>Welcome the the home page!</h1>
+<!-- Visa detta om användaren inte är inloggad -->
+<div sec:authorize="!isAuthenticated()">
+    <h1>Welcome to Securitas!</h1>
+    <form th:action="@{/login}" method="get">
+        <button type="submit">Login</button>
+    </form>
+</div>
 
-<p>Click <a th:href="@{/hello}">here</a> to login and see your greeting.</p>
+<!-- Visa detta om användaren är inloggad -->
+<div sec:authorize="isAuthenticated()">
+    <h2>Welcome, you are now logged in as <span sec:authentication="name">admin</span>!</h2>
+    <form th:action="@{/register}" method="get">
+        <button type="submit">Register New Users</button>
+    </form>
+    <br>
+    <form th:action="@{/users}" method="get">
+        <button type="submit">Users</button>
+    </form>
+    <br>
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Sign out</button>
+    </form>
+
+</div>
+
 </body>
 </html>

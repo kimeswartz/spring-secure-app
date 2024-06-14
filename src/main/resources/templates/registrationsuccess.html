@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration success</title>
+    <link rel="stylesheet" th:href="@{/css/registrationsuccess.css}" />
+</head>
+<body>
+<h1>Registration success!</h1>
+<form th:action="@{/register}" method="get">
+    <button type="submit">Register New Users</button>
+</form>
+<br>
+<form th:action="@{/users}" method="get">
+    <button type="submit">User List</button>
+</form>
+<br>
+<form th:action="@{/logout}" method="post">
+    <button type="submit">Sign out</button>
+
+</form>
+
+</body>
+</html>
