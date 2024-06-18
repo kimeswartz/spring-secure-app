@@ -8,7 +8,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class SecureWebApplication {
 
-
     private static final Logger log = LoggerFactory.getLogger(SecureWebApplication.class);
 
     public static void main(String[] args) {

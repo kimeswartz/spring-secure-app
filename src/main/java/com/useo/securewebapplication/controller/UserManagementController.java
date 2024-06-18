@@ -2,6 +2,7 @@ package com.useo.securewebapplication.controller;
 
 import com.useo.securewebapplication.MyUserDto;
 import com.useo.securewebapplication.MyUserRepository;
+import com.useo.securewebapplication.UpdateUserDto;
 import com.useo.securewebapplication.model.MyUser;
 
 import jakarta.validation.Valid;
@@ -85,15 +86,18 @@ public class UserManagementController {
     // GET handler to show the update form
     @GetMapping("/update_user")
     public String showUpdateUserForm(@RequestParam("username") String username, Model model) {
-        // Logging fetching user details for update by username
         logger.debug("Fetching user details for update by username: {}", username);
 
         Optional<MyUser> user = userRepository.findByUsername(username);
         if (user.isPresent()) {
-            model.addAttribute("user", user.get());
+            UpdateUserDto updateUserDto = new UpdateUserDto();
+            updateUserDto.setNewUsername(user.get().getUsername());
+            updateUserDto.setEmail(user.get().getEmail());
+
+            model.addAttribute("updateUserDto", updateUserDto);
+            model.addAttribute("oldUsername", username);
             return "update_user";
         } else {
-            // Logging user not found by username
             logger.debug("User not found by username: {}", username);
             model.addAttribute("error", "User not found.");
             return "error_page";
@@ -102,47 +106,49 @@ public class UserManagementController {
 
     @PostMapping("/update_user")
     public String updateUser(@RequestParam("oldUsername") String oldUsername,
-                             @RequestParam("newUsername") String newUsername,
-                             @RequestParam("newPassword") String newPassword,
-                             @RequestParam("email") String email,
+                             @Valid @ModelAttribute("updateUserDto") UpdateUserDto updateUserDto,
+                             BindingResult bindingResult,
                              Model model) {
-        // Logging updating user details for user with old username
         logger.debug("Updating user details for user with old username: {}", oldUsername);
+
+        if (bindingResult.hasErrors()) {
+            logger.debug("Validation errors occurred during user update");
+            model.addAttribute("oldUsername", oldUsername);
+            return "update_user";
+        }
 
         Optional<MyUser> userOptional = userRepository.findByUsername(oldUsername);
         if (userOptional.isPresent()) {
             MyUser existingUser = userOptional.get();
 
-            Optional<MyUser> userWithNewUsername = userRepository.findByUsername(newUsername);
-            Optional<MyUser> userWithNewEmail = userRepository.findByEmail(email);
+            Optional<MyUser> userWithNewUsername = userRepository.findByUsername(updateUserDto.getNewUsername());
+            Optional<MyUser> userWithNewEmail = userRepository.findByEmail(updateUserDto.getEmail());
 
             if ((userWithNewUsername.isPresent() && !userWithNewUsername.get().getId().equals(existingUser.getId())) ||
                     (userWithNewEmail.isPresent() && !userWithNewEmail.get().getId().equals(existingUser.getId()))) {
-                // Logging username or email already exists for another user
                 logger.debug("Username or email already exists for another user");
                 model.addAttribute("error", "Username and email must be unique.");
-                return "registration_error";
+                model.addAttribute("oldUsername", oldUsername);
+                return "update_user";
             }
 
-            existingUser.setUsername(newUsername);
-            existingUser.setPassword(passwordEncoder.encode(newPassword));
+            existingUser.setUsername(updateUserDto.getNewUsername());
+            existingUser.setPassword(passwordEncoder.encode(updateUserDto.getNewPassword()));
 
-            String anonymizedEmail = MaskingUtils.anonymizeEmail(email);
+            String anonymizedEmail = MaskingUtils.anonymizeEmail(updateUserDto.getEmail());
             existingUser.setEmail(HtmlUtils.htmlEscape(anonymizedEmail));
 
             try {
                 userRepository.save(existingUser);
-                // Logging user details updated successfully for username
-                logger.debug("User details updated successfully for username: {}", newUsername);
-                return "redirect:/update_success";
-            } catch (DataIntegrityViolationException e) {
-                // Logging data integrity violation occurred while updating user details
-                logger.debug("Data integrity violation occurred while updating user details");
-                model.addAttribute("error", "Username and email must be unique.");
-                return "registration_error";
+                logger.debug("User details updated successfully for username: {}", updateUserDto.getNewUsername());
+                return "update_success";
+            } catch (Exception e) {
+                logger.debug("Unexpected error occurred while updating user details", e);
+                model.addAttribute("error", "Unexpected error occurred. Please try again.");
+                model.addAttribute("oldUsername", oldUsername);
+                return "update_user";
             }
         } else {
-            // Logging user not found by username
             logger.debug("User not found by username: {}", oldUsername);
             model.addAttribute("error", "User not found.");
             return "error_page";
@@ -175,7 +181,7 @@ public class UserManagementController {
                 userRepository.delete(user.get());
                 // Logging user removed successfully with username
                 logger.debug("User with username {} removed successfully", username);
-                return "redirect:/delete_success";
+                return "delete_success";
             } else {
                 // Logging user not found by username
                 logger.debug("User not found by username: {}", username);
@@ -246,7 +252,7 @@ public class UserManagementController {
 
             // Logging user registered successfully
             logger.debug("User registered successfully: {}", userDto.getUsername());
-            return "redirect:/registration_success";
+            return "registration_success";
         } catch (Exception e) {
             // Logging unexpected error occurred during registration
             logger.debug("Unexpected error occurred during registration", e); // Include exception in log

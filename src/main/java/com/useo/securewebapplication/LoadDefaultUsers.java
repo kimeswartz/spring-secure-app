@@ -32,6 +32,17 @@ public class LoadDefaultUsers {
             // Save the admin user to the repository
             userRepository.save(adminUser);
         }
+        // Check if the user user already exists
+        if (userRepository.findByUsername("user").isEmpty()) {
+            // Create the user with the predefined credentials
+            MyUser regularUser = new MyUser();
+            regularUser.setUsername("user");
+            regularUser.setPassword(passwordEncoder.encode("123")); // Hash the password
+            regularUser.setRole("USER");
+
+            // Save the user to the repository
+            userRepository.save(regularUser);
+        }
     }
 }
 
