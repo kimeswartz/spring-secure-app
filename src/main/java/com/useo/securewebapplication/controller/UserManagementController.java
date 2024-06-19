@@ -9,8 +9,8 @@ import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -169,12 +169,30 @@ public class UserManagementController {
     public String removeUser(@RequestParam("username") String username,
                              @RequestParam("confirmUsername") String confirmUsername,
                              Model model) {
+
         // Logging removing user with username
         logger.debug("Removing user with username: {}", username);
 
         username = HtmlUtils.htmlEscape(username);
         confirmUsername = HtmlUtils.htmlEscape(confirmUsername);
 
+        // Retrieve logged in user's authentication details
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String loggedInUsername = authentication.getName();
+
+        // Check if user is trying to delete themselves and if they have 'ADMIN' role
+        if (username.equals(loggedInUsername) && authentication.getAuthorities().stream()
+                .anyMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
+            // Log the attempt to delete self as admin
+            logger.warn("Admin user {} attempted to delete themselves", loggedInUsername);
+
+            model.addAttribute("error", "Admin cannot delete yourself - contact your manager");
+
+            // Return to error page or show message as per your application flow
+            return "list_users";
+        }
+
+        // If user is present in database, remove the user. else, error.
         if (username.equals(confirmUsername)) {
             Optional<MyUser> user = userRepository.findByUsername(username);
             if (user.isPresent()) {
@@ -215,11 +233,11 @@ public class UserManagementController {
         if (bindingResult.hasErrors()) {
             // Logging validation errors occurred during registration
             logger.debug("Validation errors occurred during registration");
-            return "register"; // return to registration form to display errors
+            return "register"; // return to registration form
         }
 
         try {
-            // Check if username already exists
+            // Check if *username already exists
             MyUser existingUsername = userRepository.findByUsername(userDto.getUsername()).orElse(null);
             if (existingUsername != null) {
                 // Logging username already exists
@@ -228,7 +246,7 @@ public class UserManagementController {
                 return "registration_error";
             }
 
-            // Check if email already exists
+            // Check if *email already exists
             MyUser existingEmail = userRepository.findByEmail(userDto.getEmail()).orElse(null);
             if (existingEmail != null) {
                 // Logging email already exists
@@ -239,12 +257,11 @@ public class UserManagementController {
 
             // Create and save new user
             MyUser newUser = new MyUser();
-            newUser.setUsername(HtmlUtils.htmlEscape(userDto.getUsername())); // Escape HTML to prevent XSS
-            newUser.setPassword(passwordEncoder.encode(HtmlUtils.htmlEscape(userDto.getPassword()))); // Encode password
+            newUser.setUsername(HtmlUtils.htmlEscape(userDto.getUsername())); // Escape HTML to prevent (Cross-Site Scripting)
+            newUser.setPassword(passwordEncoder.encode(HtmlUtils.htmlEscape(userDto.getPassword())));
 
-            // Optional: Anonymize email if needed (assuming MaskingUtils is a utility class you have)
             String anonymizedEmail = MaskingUtils.anonymizeEmail(userDto.getEmail());
-            newUser.setEmail(HtmlUtils.htmlEscape(anonymizedEmail)); // Escape email as well
+            newUser.setEmail(HtmlUtils.htmlEscape(anonymizedEmail)); // Escape HTML to prevent (Cross-Site Scripting)
 
             newUser.setRole("USER");
 

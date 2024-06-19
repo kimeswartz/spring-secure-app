@@ -67,6 +67,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     @WithMockUser(username = "admin", password = "123", roles = "ADMIN")
     public void testRegistrationFunction_Failure_UsernameExists() throws Exception {
+
         // Create an already existing user
         MyUser existingUser = new MyUser();
         existingUser.setUsername("test");
@@ -94,6 +95,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
     @Test
     @WithMockUser(username = "admin", password = "123", roles = "ADMIN")
     public void testDeleteUser_Success() throws Exception {
+
         // Create a user to delete
         MyUser userToDelete = new MyUser();
         userToDelete.setUsername("userToDelete");

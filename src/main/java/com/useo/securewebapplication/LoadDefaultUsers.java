@@ -26,6 +26,7 @@ public class LoadDefaultUsers {
             // Create the admin user with the predefined credentials
             MyUser adminUser = new MyUser();
             adminUser.setUsername("admin");
+            adminUser.setEmail("admin@gmail.com");
             adminUser.setPassword(passwordEncoder.encode("123")); // Hash the password
             adminUser.setRole("ADMIN");
 
@@ -37,6 +38,7 @@ public class LoadDefaultUsers {
             // Create the user with the predefined credentials
             MyUser regularUser = new MyUser();
             regularUser.setUsername("user");
+            regularUser.setEmail("user@gmail.com");
             regularUser.setPassword(passwordEncoder.encode("123")); // Hash the password
             regularUser.setRole("USER");
 
