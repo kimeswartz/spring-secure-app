@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
@@ -20,9 +21,14 @@
         </rollingPolicy>
     </appender>
 
+    <!-- Root logger level and appenders -->
     <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ROLLING_FILE"/>
     </root>
+
+    <!-- Define specific log levels for packages -->
+    <logger name="org.debug-logs.web" level="DEBUG"/>
+    <logger name="com.trace-logs.myapp" level="TRACE"/>
 
 </configuration>

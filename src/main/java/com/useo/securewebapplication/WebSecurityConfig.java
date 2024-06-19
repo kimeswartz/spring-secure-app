@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.web.servlet.error.ErrorViewResolve
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,7 +41,7 @@ public class WebSecurityConfig {
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/") // Redirect to home after login
+                        .defaultSuccessUrl("/")
                         .permitAll()
                 )
                 .logout(logout -> logout
@@ -54,7 +55,8 @@ public class WebSecurityConfig {
                 )
                 .exceptionHandling((handling) -> handling
                         .accessDeniedHandler(accessDeniedHandler)
-                );
+                )
+                .httpBasic(Customizer.withDefaults());
 
         return http.build();
     }
@@ -77,4 +79,5 @@ public class WebSecurityConfig {
         };
     }
 }
+
 

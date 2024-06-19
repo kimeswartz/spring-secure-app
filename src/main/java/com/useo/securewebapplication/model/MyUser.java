@@ -9,9 +9,12 @@ public class MyUser {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Unique user here (delete from controller?)
     @Column(unique = true)
     private String username;
+
     private String password;
+
     @Column(unique = true)
     private String email;
     private String role;

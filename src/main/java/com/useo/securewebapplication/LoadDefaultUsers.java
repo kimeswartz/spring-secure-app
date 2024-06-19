@@ -26,11 +26,24 @@ public class LoadDefaultUsers {
             // Create the admin user with the predefined credentials
             MyUser adminUser = new MyUser();
             adminUser.setUsername("admin");
+            adminUser.setEmail("admin@gmail.com");
             adminUser.setPassword(passwordEncoder.encode("123")); // Hash the password
             adminUser.setRole("ADMIN");
 
             // Save the admin user to the repository
             userRepository.save(adminUser);
+        }
+        // Check if the user user already exists
+        if (userRepository.findByUsername("user").isEmpty()) {
+            // Create the user with the predefined credentials
+            MyUser regularUser = new MyUser();
+            regularUser.setUsername("user");
+            regularUser.setEmail("user@gmail.com");
+            regularUser.setPassword(passwordEncoder.encode("123")); // Hash the password
+            regularUser.setRole("USER");
+
+            // Save the user to the repository
+            userRepository.save(regularUser);
         }
     }
 }

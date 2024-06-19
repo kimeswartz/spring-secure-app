@@ -7,7 +7,10 @@
 </head>
 <body>
 <form action="/delete" method="post">
-    <p>Do you want to delete '<span th:text="${username}"></span>'? Confirm by typing the name and click 'Delete User'.</p>
+    <p>Do you want to delete '<span th:text="${username}"></span>'? Confirm by typing the name and click 'Delete User'.
+    </p>
+    <p><span style="color:green;">Administrators are unable to delete their own accounts. Any attempt to delete your own admin account will redirect you to the users list page without effectuating the deletion of your account.</span>
+    </p>
     <label>
         <input type="text" name="confirmUsername" placeholder="Type username here" required>
     </label>

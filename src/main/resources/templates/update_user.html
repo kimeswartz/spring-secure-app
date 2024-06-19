@@ -7,18 +7,39 @@
 </head>
 <body>
 <h2>Update User</h2>
-<form action="/update_user" method="post" th:object="${user}">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-    <input type="hidden" name="oldUsername" th:value="${user.username}"/>
-    <label for="newUsername">New Username:</label><br>
+<form action="/update_user" method="post" th:object="${updateUserDto}">
+    <!-- CSRF token -->
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
 
-    <input type="text" id="newUsername" name="newUsername" th:value="${user.username}" required><br>
-    <label for="newPassword">New Password:</label><br>
-    <input type="password" id="newPassword" name="newPassword" required><br>
+    <!-- Old username (hidden) -->
+    <input type="hidden" name="oldUsername" th:value="${oldUsername}" />
 
+    <!-- New username -->
+    <label for="newUsername">New Username:</label>
+    <input type="text" id="newUsername" class="form-control" th:field="*{newUsername}" placeholder="Enter new username" required
+           title="Username must be at least one character long"
+           pattern=".{1,}" oninvalid="this.setCustomValidity('Username must be at least one character long')"
+           oninput="this.setCustomValidity('')" />
+    <!-- Error message for username -->
+    <div th:if="${#fields.hasErrors('newUsername')}" th:errors="*{newUsername}"></div>
+
+    <!-- New password -->
+    <label for="newPassword">Password:</label><br>
+    <input type="password" id="newPassword" name="newPassword" th:field="*{newPassword}" placeholder="Enter a new password" required
+           title="Password must be at least 3 characters long"
+           pattern=".{3,}" oninvalid="this.setCustomValidity('Password must be at least 3 characters long')"
+           oninput="this.setCustomValidity('')" />
+    <div th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"></div>
+
+    <!-- Email -->
     <label for="email">Email:</label><br>
-    <input type="email" id="email" name="email" th:value="${user.email}" required><br>
+    <input type="email" id="email" name="email" th:field="*{email}" placeholder="Enter a new email" required
+           title="Email must be a valid address"
+           oninvalid="this.setCustomValidity('Please enter a valid email address')"
+           oninput="this.setCustomValidity('')" />
+    <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
 
+    <!-- Submit button -->
     <input type="submit" value="Update">
 </form>
 </body>
